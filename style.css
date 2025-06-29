@@ -1,10 +1,39 @@
+/* style.css */
+
 body {
-    font-family: sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
-    color: #333;
+  margin: 0;
+  padding: 0;
 }
 
-h1 {
-    color: #0056b3;
+header {
+  background-color: #fcecd6; /* matching the theme of the logo */
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 90px;
+  width: auto;
+}
+
+/* Spacer to push icons to right */
+.spacer {
+  flex: 1;
+}
+
+.contact-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.icon {
+  height: 40px;
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.icon:hover {
+  transform: scale(1.1);
 }
