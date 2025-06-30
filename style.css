@@ -104,3 +104,15 @@ header {
   transform: scale(1.1);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
+
+/* Footer Styles */
+    footer {
+      background-color: #fcecd6; /* light cream background */
+      padding: 1rem; /* 16px padding */
+      text-align: center; /* center text */
+      color: #6b3e26; /* dark brown text */
+      font-size: 0.875rem; /* small text size (14px) */
+      margin-top: auto; /* pushes footer to bottom if using flex layout */
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* inner shadow for depth */
+    }
+
