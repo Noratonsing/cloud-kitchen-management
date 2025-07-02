@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Zone Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF5; /* Light beige background from screenshot */
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-container {
+            background: #FFFFFF;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 420px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transform: translateY(-30px);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+
+        .form-toggle button.active {
+            border-color: #A16207; /* A brown/gold color */
+            color: #a1623a;
+            background-color: #FEFCE8;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.5rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #A16207;
+            box-shadow: 0 0 0 3px rgba(161, 98, 7, 0.2);
+        }
+
+        .submit-btn {
+            background-color: #854D0E; /* Darker brown */
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            width: 100%;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: #A16207; /* Lighter brown on hover */
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #9CA3AF;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .close-btn:hover {
+            color: #1F2937;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Main Content of your Page -->
+    <div class="min-h-screen flex flex-col items-center justify-center p-4">
+        <div class="text-center">
+            <h1 class="text-4xl font-bold text-yellow-900">Welcome to NM Bites</h1>
+            <p class="text-yellow-700 mt-2">Where Every Bite Counts!</p>
+            <button id="openModalBtn" class="mt-8 bg-yellow-800 hover:bg-yellow-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                Staff Zone Login
+            </button>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="staffModal" class="modal-overlay">
+        <div class="modal-container">
+            <!-- Close Button -->
+            <div id="closeModalBtn" class="close-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-yellow-900">Staff Zone</h2>
+            </div>
+
+            <!-- Toggle Buttons -->
+            <div class="form-toggle flex border border-gray-200 rounded-lg p-1 mb-6">
+                <button id="showLoginBtn" class="w-1/2 p-2 rounded-md font-medium text-sm text-gray-600 active">Login</button>
+                <button id="showSignupBtn" class="w-1/2 p-2 rounded-md font-medium text-sm text-gray-600">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="loginForm" class="form-section active">
+                <form id="loginFormElement" class="space-y-4">
+                    <div>
+                        <label for="login-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input type="email" id="login-email" name="email" class="form-input" placeholder="you@example.com" required>
+                    </div>
+                    <div>
+                        <label for="login-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input type="password" id="login-password" name="password" class="form-input" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Sign In</button>
+                </form>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signupForm" class="form-section">
+                <form id="googleSheetForm" class="space-y-4">
+                    <div>
+                        <label for="signup-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <input type="text" id="signup-name" name="Name" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label for="signup-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input type="email" id="signup-email" name="Email" class="form-input" placeholder="you@example.com" required>
+                    </div>
+                    <div>
+                        <label for="signup-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input type="password" id="signup-password" name="Password" class="form-input" placeholder="Create a password" required>
+                    </div>
+                    <button type="submit" id="signupSubmitBtn" class="submit-btn">Create Account</button>
+                </form>
+                 <p id="signupStatus" class="text-center text-sm mt-4"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Modal Control ---
+        const openModalBtn = document.getElementById('openModalBtn');
+        const staffModal = document.getElementById('staffModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        openModalBtn.addEventListener('click', () => {
+            staffModal.classList.add('active');
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            staffModal.classList.remove('active');
+        });
+
+        // Close modal if user clicks on the overlay
+        staffModal.addEventListener('click', (event) => {
+            if (event.target === staffModal) {
+                staffModal.classList.remove('active');
+            }
+        });
+
+        // --- Form Toggling ---
+        const showLoginBtn = document.getElementById('showLoginBtn');
+        const showSignupBtn = document.getElementById('showSignupBtn');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+
+        showLoginBtn.addEventListener('click', () => {
+            loginForm.classList.add('active');
+            signupForm.classList.remove('active');
+            showLoginBtn.classList.add('active');
+            showSignupBtn.classList.remove('active');
+        });
+
+        showSignupBtn.addEventListener('click', () => {
+            signupForm.classList.add('active');
+            loginForm.classList.remove('active');
+            showSignupBtn.classList.add('active');
+            showLoginBtn.classList.remove('active');
+        });
+        
+        // --- Login Form Submission ---
+        const loginFormElement = document.getElementById('loginFormElement');
+        
+        loginFormElement.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // NOTE: This is a basic redirect for demonstration purposes.
+            // A real login system would require validating the email and password
+            // against the data stored in your Google Sheet. This would require
+            // adding a new function to your Google Apps Script to read data from the sheet.
+            
+            // Redirecting to admin.html
+            window.location.href = 'admin.html'; 
+        });
+
+        // --- Google Sheets Integration for Signup Form ---
+        const signupGoogleForm = document.getElementById('googleSheetForm');
+        const signupSubmitBtn = document.getElementById('signupSubmitBtn');
+        const signupStatus = document.getElementById('signupStatus');
+        
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwc2lrEPwPwFEQYY1NDsJ2GjlX3v-5WctlgedYCU6vEd4glYFmG5nSVq_cgfUN0sMI5Ag/exec';
+
+        signupGoogleForm.addEventListener('submit', e => {
+            e.preventDefault();
+
+            signupSubmitBtn.disabled = true;
+            signupSubmitBtn.textContent = 'Creating...';
+            signupStatus.textContent = '';
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(signupGoogleForm)})
+                .then(response => {
+                    if (response.ok) {
+                        signupStatus.textContent = 'Account created successfully!';
+                        signupStatus.style.color = 'green';
+                        signupGoogleForm.reset();
+                    } else {
+                        throw new Error('Network response was not ok.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    signupStatus.textContent = 'Error! Could not create account.';
+                    signupStatus.style.color = 'red';
+                })
+                .finally(() => {
+                    signupSubmitBtn.disabled = false;
+                    signupSubmitBtn.textContent = 'Create Account';
+                });
+        });
+    </script>
+
+</body>
+</html>
