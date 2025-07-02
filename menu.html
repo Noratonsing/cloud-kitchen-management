@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to NB Bites</title>
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 90%;
+      max-height: 90%;
+      overflow-y: auto;
+    }
+    .close-btn {
+      background: #ffcc66;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 15px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .close-btn:hover {
+      background: #ffaa33;
+    }
+    .modal-img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="NB Bites Logo" class="logo">
+    <div class="welcome-message">
+      <h1>Welcome to NM Bites - Where Every Bite Counts!</h1>
+    </div>
+    <div class="spacer"></div>
+    <div class="contact-icons">
+      <a href="https://wa.me/918591132408" target="_blank">
+        <img src="whatsapp.png" alt="WhatsApp" class="icon">
+      </a>
+      <a href="mailto:bitesnm@gmail.com">
+        <img src="gmail.png" alt="Gmail" class="icon">
+      </a>
+      <a href="https://www.instagram.com/bitesnm_kharar/" target="_blank">
+        <img src="instagram.png" alt="Instagram" class="icon">
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+    <!--Customer Section-->
+    <div class="card">
+      <a href="customer.html">
+        <img src="customer.png" alt="Customer" class="hover-img">
+      </a>
+      <div class="buttons">
+        <button class="btn" onclick="openModal()">View Menu</button>
+        <button>Feedback</button>
+      </div>
+    </div>
+
+    <!--Latest News Image-->
+    <div class="card latest-news-card">
+      <a href="news.html">
+        <img src="shadow news.png" alt="announcements" id="latestnews" class="hover-img">
+      </a>
+    </div>
+
+    <!--Admin Panel Section-->
+    <div class="card">
+      <a href="adminlogin.html">
+        <img src="Admin.png" alt="Admin" class="hover-img">
+      </a>
+      <div class="buttons">
+        <button>Staff Zone Login</button>
+        <button>Reports</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Section -->
+  <div class="modal" id="menuModal">
+    <div class="modal-content">
+      <img src="menu.png" alt="Menu Image" class="modal-img">
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 NB Bites. All rights reserved.
+  </footer>
+
+  <script>
+    function openModal() {
+      document.getElementById('menuModal').classList.add('open');
+    }
+    function closeModal() {
+      document.getElementById('menuModal').classList.remove('open');
+    }
+  </script>
+</body>
+</html>
